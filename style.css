@@ -1,0 +1,60 @@
+/* === BODY STYLING === */
+body {
+  background-image: url("background.jpg"); /* Sets background image */
+  background-repeat: no-repeat;           /* Prevents image from repeating */
+  background-size: cover;                 /* Makes image cover entire screen */
+  font-family: 'Lato';                    /* Clean, modern font */
+}
+
+/* === QUIZ HEADING === */
+.quiz {
+  font-size: 50px;                        /* Large heading text */
+  font-weight: bolder;                    /* Extra bold */
+  margin-left: 650px;                     /* Pushes heading to right */
+  background-color: rgba(240, 248, 255, 0.919); /* Soft background for contrast */
+}
+
+/* === SUBMIT BUTTON STYLING === */
+button {
+  margin-top: 20px;
+  font-size: 18px;                        /* Slightly larger font */
+  padding: 5px 15px;                      /* Padding inside the button */
+  border-radius: 5px;                     /* Rounded corners */
+  background-color: rgb(212, 127, 117);   /* Warm background color */
+  color: white;                           /* White text */
+  font-weight: bold;                      /* Bold text */
+  border: rgba(198, 111, 101, 0.884) solid 2px; /* Colored border */
+}
+
+/* === FLEX CONTAINER FOR HEADING & SCORE === */
+.parent {
+  display: flex;                          /* Puts children side by side */
+}
+
+/* === SCORE BOX STYLING === */
+#result {
+  border: 2px solid rgb(228, 209, 207);   /* Light border */
+  border-radius: 200px;                   /* Fully rounded (pill shape) */
+  font-size: 30px;                        /* Large score text */
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 290px;                     /* Space from heading */
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(234, 161, 153);   /* Soft pink background */
+}
+
+/* === QUESTION CONTAINER STYLING === */
+.dataContainer {
+  border: 2px solid salmon;              /* Border around quiz */
+  border-radius: 100px 0px 100px 0px;    /* Diagonal rounded corners */
+  padding: 30px 100px;                   /* Internal spacing */
+  line-height: 30px;                     /* Spacing between lines/options */
+  width: 800px;                          /* Fixed width */
+  margin-left: 200px;                    /* Centers the container */
+  font-size: 20px;                       /* Larger text for readability */
+  background-color: rgba(240, 248, 255, 0.919); /* Soft light blue bg */
+}

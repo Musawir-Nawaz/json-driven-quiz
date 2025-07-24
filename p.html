@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css"> <!-- External CSS file -->
+</head>
+<body>
+
+  <!-- Main heading and score display -->
+  <div class="parent">
+    <h1 class="quiz">QUIZ</h1>
+    <div id="result">Score</div>  
+  </div>
+
+  <!-- Container for quiz questions and submit button -->
+  <div class="dataContainer">
+    <div class="data"></div> <!-- Questions will be injected here -->
+    <button id="submitBtn">Submit</button> <!-- Button to check answers -->
+  </div>
+
+  <script>
+    const ele = document.querySelector(".data"); // Container for questions
+    let correctAnswers = []; // Stores correct answer indices
+    let Qno = 0; // Question number counter
+
+    // Fetching quiz data from external JSON file
+    fetch("https://gist.githubusercontent.com/Musawir-Nawaz/8438a238bc4967462d21a27930027311/raw/6f25f059c5fbeb3d7a1504d3e53d8143d6ee2344/web-quiz.json")
+      .then((e) => e.json()) // Convert response to JSON
+      .then((e) => {
+        for (let a of e) {
+          // Display each question
+          ele.innerHTML += "<b>Q:" + `${a.question}` + "</b><br>";
+          let i = 0;
+
+          for (let op of a.options) {
+            // Create radio button for each option
+            let label = document.createElement("label");
+            let radioButton = document.createElement("input");
+            radioButton.type = "radio";
+            radioButton.name = "Q" + Qno; // Grouping radios by question
+            radioButton.value = i;
+
+            label.appendChild(radioButton); // Add radio button
+            label.appendChild(document.createTextNode(`${op}`)); // Add option text
+            label.appendChild(document.createElement("br")); // Line break
+            ele.appendChild(label); // Append label to container
+            i++;
+          }
+
+          ele.appendChild(document.createElement("br")); // Space after each question
+          Qno++;
+          correctAnswers.push(a.correctIndex); // Store correct answer
+        }
+      })
+      .catch((e) => {
+        // Handle fetch errors
+        ele.innerHTML = "<b>Error Found: " + e.message + "</b>";
+      });
+
+    // Submit button logic
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      let score = 0;
+
+      // Loop through all questions
+      for (let i = 0; i < correctAnswers.length; i++) {
+        // Get selected answer for current question
+        const selected = document.querySelector(`input[name="Q${i}"]:checked`);
+
+        // Proceed only if an option is selected
+        if (!(selected == null)) {
+          const ans = Number(selected.value); // Convert selected value to number
+
+          // Check if answer is correct
+          if (ans === correctAnswers[i]) {
+            score++;
+            selected.parentElement.style.backgroundColor = "green"; // Highlight correct
+          } else {
+            selected.parentElement.style.backgroundColor = "rgba(212, 46, 28, 0.884)"; // Highlight wrong
+          }
+        }
+      }
+
+      // Show final score
+      document.getElementById("result").innerHTML = score + "/5";
+    });
+  </script>
+</body>
+</html>
